@@ -1,0 +1,7 @@
+<% padrao = "--no-source --color --expand -f pretty -f json_pretty --out=results/report.json" %>
+default: <%= padrao %>
+chrome: <%= padrao %> BROWSER=chrome 
+chrome_headless: <%= padrao %> BROWSER=headless --verbose --fail-fast
+# firefox: <%= padrao %> BROWSER=firefox --fail-fast
+# foxnoui: <%= padrao %> BROWSER=firefox-headless --verbose
+# edge: <%= padrao %> BROWSER=edge --fail-fast

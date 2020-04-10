@@ -1,0 +1,118 @@
+Dado("que eu acesse o site e-commerce") do
+@home.load
+expect(@home).to have_busca
+expect(@home).to have_menu
+expect(@home).to have_banner
+expect(@home).to have_footer
+end
+
+Dado("busque por um <produto>") do |produto|
+@home.busca.barra_busca.set produto.rows_hash[:produto]
+@home.busca.botao_busca.click
+end
+
+Dado("verifique que estou na pagina de busca") do 
+expect(@busca).to have_filtro
+expect(@busca).to have_itens_busca
+end
+
+Quando("clicar no botao conferir de algum produto") do
+  
+produto = @busca.itens_busca.sample
+produto.hover
+sleep 1
+within(produto) do
+    @busca.botao_conferir.click
+end
+#   conferir.find('button[qa-automation="search-buy-button"]').click
+end
+
+Quando("escolher a cor e o tamanho no modal de compra rapida") do
+@busca.quickview.selecao_cor.sample.click
+@busca.quickview.selecao_tamanho.sample.click
+sleep 1
+end
+
+Quando("clicar no botao adicionar ao carrinho") do
+$id_produto = @busca.quickview.id_produto.text
+@busca.quickview.adicionar_carrinho.click
+sleep 1
+end
+
+Então("o item deve ser adicionado ao mini carrinho") do
+@busca.mini_cart.click
+end
+
+Então("deve estar relacionado na lista de Meu carrinho") do
+expect(@carrinho).to have_lista_carrinho
+expect(@carrinho).to have_resumo_compra
+  
+lista_produtos = Array.new
+@carrinho.lista_id_produtos.each do |produto_id|
+    lista_produtos << produto_id.text.tr('# ', '')
+end
+expect(lista_produtos.include?($id_produto)).to be_truthy
+end
+
+Quando("clicar em algum produto") do
+puts "test"
+byebug
+end
+
+Quando("escolher a cor e o tamanho na pagina de produto") do
+
+end
+
+Quando("clicar em {string}") do |string|
+
+end
+
+Então("o produto deve estar listado na pagina do carrinho") do
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dado("que eu acesse o site e-commerce") do
+pending # Write code here that turns the phrase above into concrete actions
+end
+
+Dado("busque por um <produto>") do |table|
+# table is a Cucumber::MultilineArgument::DataTable
+pending # Write code here that turns the phrase above into concrete actions
+end
+
+Dado("verifique que estou na pagina de busca") do
+pending # Write code here that turns the phrase above into concrete actions
+end
+
+Quando("clicar no botao conferir de algum produto") do
+pending # Write code here that turns the phrase above into concrete actions
+end
+
+Quando("escolher a cor e o tamanho no modal de compra rapida") do
+pending # Write code here that turns the phrase above into concrete actions
+end
+
+Quando("clicar no botao adicionar ao carrinho") do
+pending # Write code here that turns the phrase above into concrete actions
+end
+
+Então("o item deve ser adicionado ao mini carrinho") do
+pending # Write code here that turns the phrase above into concrete actions
+end
+
+Então("deve estar relacionado na lista de Meu carrinho") do
+pending # Write code here that turns the phrase above into concrete actions
+end

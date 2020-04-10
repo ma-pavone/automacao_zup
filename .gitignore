@@ -1,0 +1,6 @@
+Gemfile.lock
+results/*.html
+results/*.json
+.byebug_history
+results/screenshots/*
+!results/screenshots/.gitkeep
