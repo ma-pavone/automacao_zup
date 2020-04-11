@@ -8,12 +8,13 @@ class QuickView < SitePrism::Section
 end
 
 class BuscaPage < SitePrism::Page
-    elements :itens_busca, 'div[qa-automation="search-itens"]'
-    
-    elements :produtos, 'div.item-card__images'
+    elements :itens_busca, '[qa-automation="search-itens"]'    
+    elements :produtos_indisponiveis, 'span[itemprop="name"]', text: 'Nike Paris Saint-Germain'
+
+    element :grid, 'section.search-list'
     element :filtro, 'div.filters__container'
-     # elements :botoes_conferir, 'div.item-card__images__buttons > button#quick-view-button'
     element :botao_conferir, '[qa-automation="search-buy-button"]'
-    element :mini_cart, 'a[qa-automation="home-cart-button"]'
+    element :mini_cart, '[qa-automation="home-cart-button"]'
+
     section :quickview, QuickView, 'div.is-quickview'
 end

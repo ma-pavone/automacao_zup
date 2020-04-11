@@ -5,11 +5,13 @@ end
 
 
 class HomePage < SitePrism::Page
-    set_url 'https://www.netshoes.com.br/'
+    set_url '/'
 
     element :menu, 'div.navbar__container'
     element :banner, 'main#content'
+
     elements :footer, 'div.container-most-wanted'
+    
     section :busca, Busca, 'section.search'
 end
 

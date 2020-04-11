@@ -11,12 +11,12 @@ require 'byebug'
 
 World(Capybara)
 
-Capybara.register_driver :selenium do |app|
+Capybara.register_driver :selenium do |app| #escolha de UI ou headless
   case ENV["BROWSER"]
     when "chrome"
       args = %w(start-maximized --disable-dev-shm-usage --log-level=7)
     when "headless"
-      args = %w(--headless --log-level=3 disable-gpu no-sandbox --disable-dev-shm-usage)
+      args = %w(--headless --log-level=3  no-sandbox --disable-dev-shm-usage disable-gpu )# 
     else
       puts "Browser não selecionado! Rode o cucumber com '-p chrome' ou '-p chrome_headless'"
       Cucumber.wants_to_quit = true
@@ -25,7 +25,7 @@ Capybara.register_driver :selenium do |app|
   opts = { browser: :chrome, options: Selenium::WebDriver::Chrome::Options.new(
     args: args)}
     
-    Capybara::Selenium::Driver.new(app, opts)
+    Capybara::Selenium::Driver.new(app, opts) # instancia o novo driver com o nome de selenium
 
 end
 
@@ -44,11 +44,11 @@ Capybara::Screenshot.register_driver(:selenium) do |driver, path|
   driver.browser.save_screenshot path
 end
 
-Capybara::Screenshot.webkit_options = {width: 1920, height: 1080}
+Capybara::Screenshot.webkit_options = {width: 1920, height: 1080} # configs da captura de tela
 Capybara::Screenshot.autosave_on_failure = false
 Capybara::Screenshot.prune_strategy = :keep_last_run
 
-Capybara.configure do |config|
+Capybara.configure do |config| #configs padroes
   config.default_driver = :selenium 
   config.javascript_driver = :webkit
   config.default_max_wait_time = 12
@@ -60,7 +60,7 @@ Capybara.configure do |config|
   config.automatic_label_click = true
 end
 
-def ss_capture(nome_arquivo, cenario_result)
+def ss_capture(nome_arquivo, cenario_result) # metodo para capturar e realocar as capturas na estrutura
   caminho_arquivo = "results/screenshots/#{cenario_result}"
   foto = "#{caminho_arquivo}/#{nome_arquivo}.png"
   save_screenshot(foto)
@@ -68,7 +68,7 @@ def ss_capture(nome_arquivo, cenario_result)
 end
 
 =begin 
-def add_browser_logs
+def add_browser_logs # log adicional para o report_builder ***** nao utilizado
   time_now = Time.now
   current_url = Capybara.current_url.to_s # Getting current URL
   logs = page.driver.browser.manage.logs.get(:browser).map {|line| [line.level, line.message]} # Gather browser logs

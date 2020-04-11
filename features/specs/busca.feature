@@ -28,6 +28,6 @@ Então o produto deve estar listado na pagina do carrinho
 
 @indisponivel
 Cenario: Tentar adicionar um produto indisponível
-Quando clicar em algum produto com "tamanho" ou "cor" indisponiveis
-    E selecionar o icone indisponivel
+Quando encontrar algum produto com tamanho ou cor indisponiveis
+    E selecionar esse produto indisponivel
 Então devo visualizar a mensagem de "Produto indisponível"
